@@ -22,6 +22,11 @@ export function SalaryGrowthCalculator() {
   const [result, setResult] = useState<GrowthResult | null>(null);
   const [error, setError] = useState("");
 
+  function clearOutput() {
+    setResult(null);
+    setError("");
+  }
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
@@ -64,7 +69,10 @@ export function SalaryGrowthCalculator() {
               id="starting-salary"
               inputMode="decimal"
               min="0.01"
-              onChange={(event) => setStartingSalary(event.target.value)}
+              onChange={(event) => {
+                setStartingSalary(event.target.value);
+                clearOutput();
+              }}
               step="0.01"
               type="number"
               value={startingSalary}
@@ -77,7 +85,10 @@ export function SalaryGrowthCalculator() {
               inputMode="decimal"
               max="100"
               min="-100"
-              onChange={(event) => setGrowthRate(event.target.value)}
+              onChange={(event) => {
+                setGrowthRate(event.target.value);
+                clearOutput();
+              }}
               step="0.01"
               type="number"
               value={growthRate}
@@ -91,7 +102,10 @@ export function SalaryGrowthCalculator() {
               inputMode="numeric"
               max="50"
               min="1"
-              onChange={(event) => setYears(event.target.value)}
+              onChange={(event) => {
+                setYears(event.target.value);
+                clearOutput();
+              }}
               step="1"
               type="number"
               value={years}

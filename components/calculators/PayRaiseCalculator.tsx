@@ -29,6 +29,11 @@ export function PayRaiseCalculator() {
   const [result, setResult] = useState<RaiseResult | null>(null);
   const [error, setError] = useState("");
 
+  function clearOutput() {
+    setResult(null);
+    setError("");
+  }
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
@@ -77,7 +82,10 @@ export function PayRaiseCalculator() {
               id="current-pay"
               inputMode="decimal"
               min="0.01"
-              onChange={(event) => setCurrentPay(event.target.value)}
+              onChange={(event) => {
+                setCurrentPay(event.target.value);
+                clearOutput();
+              }}
               step="0.01"
               type="number"
               value={currentPay}
@@ -87,9 +95,10 @@ export function PayRaiseCalculator() {
             <label htmlFor="pay-period">Pay period</label>
             <select
               id="pay-period"
-              onChange={(event) =>
-                setPeriod(event.target.value as PayPeriod)
-              }
+              onChange={(event) => {
+                setPeriod(event.target.value as PayPeriod);
+                clearOutput();
+              }}
               value={period}
             >
               <option value="hourly">Hourly</option>
@@ -108,7 +117,10 @@ export function PayRaiseCalculator() {
                 inputMode="decimal"
                 max="168"
                 min="1"
-                onChange={(event) => setHoursPerWeek(event.target.value)}
+                onChange={(event) => {
+                  setHoursPerWeek(event.target.value);
+                  clearOutput();
+                }}
                 step="0.5"
                 type="number"
                 value={hoursPerWeek}
@@ -124,14 +136,20 @@ export function PayRaiseCalculator() {
             <div className="segmented" role="group" aria-label="Raise type">
               <button
                 aria-pressed={mode === "percentage"}
-                onClick={() => setMode("percentage")}
+                onClick={() => {
+                  setMode("percentage");
+                  clearOutput();
+                }}
                 type="button"
               >
                 Percentage
               </button>
               <button
                 aria-pressed={mode === "fixed"}
-                onClick={() => setMode("fixed")}
+                onClick={() => {
+                  setMode("fixed");
+                  clearOutput();
+                }}
                 type="button"
               >
                 Fixed amount
@@ -145,7 +163,10 @@ export function PayRaiseCalculator() {
               id="raise-value"
               inputMode="decimal"
               min="0"
-              onChange={(event) => setRaiseValue(event.target.value)}
+              onChange={(event) => {
+                setRaiseValue(event.target.value);
+                clearOutput();
+              }}
               step="0.01"
               type="number"
               value={raiseValue}

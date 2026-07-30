@@ -30,6 +30,11 @@ export function RaisePercentageCalculator() {
   const [result, setResult] = useState<ReverseResult | null>(null);
   const [error, setError] = useState("");
 
+  function clearOutput() {
+    setResult(null);
+    setError("");
+  }
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
@@ -96,7 +101,10 @@ export function RaisePercentageCalculator() {
               id="old-pay"
               inputMode="decimal"
               min="0.01"
-              onChange={(event) => setOldPay(event.target.value)}
+              onChange={(event) => {
+                setOldPay(event.target.value);
+                clearOutput();
+              }}
               step="0.01"
               type="number"
               value={oldPay}
@@ -108,7 +116,10 @@ export function RaisePercentageCalculator() {
               id="new-pay"
               inputMode="decimal"
               min="0"
-              onChange={(event) => setNewPay(event.target.value)}
+              onChange={(event) => {
+                setNewPay(event.target.value);
+                clearOutput();
+              }}
               step="0.01"
               type="number"
               value={newPay}
@@ -118,9 +129,10 @@ export function RaisePercentageCalculator() {
             <label htmlFor="comparison-period">Pay period</label>
             <select
               id="comparison-period"
-              onChange={(event) =>
-                setPeriod(event.target.value as PayPeriod)
-              }
+              onChange={(event) => {
+                setPeriod(event.target.value as PayPeriod);
+                clearOutput();
+              }}
               value={period}
             >
               <option value="hourly">Hourly</option>
@@ -138,7 +150,10 @@ export function RaisePercentageCalculator() {
                 inputMode="decimal"
                 max="168"
                 min="1"
-                onChange={(event) => setHoursPerWeek(event.target.value)}
+                onChange={(event) => {
+                  setHoursPerWeek(event.target.value);
+                  clearOutput();
+                }}
                 step="0.5"
                 type="number"
                 value={hoursPerWeek}
