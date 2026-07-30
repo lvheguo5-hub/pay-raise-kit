@@ -1,13 +1,28 @@
 import type { Metadata } from "next";
 
+const pageTitle = "Privacy Policy | Pay Raise Kit";
+const pageDescription =
+  "Read how Pay Raise Kit handles calculator inputs, hosting data, contact emails, and future policy changes.";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "Privacy Policy | Pay Raise Kit",
+    absolute: pageTitle,
   },
-  description:
-    "Read how Pay Raise Kit handles calculator inputs, hosting data, contact emails, and future policy changes.",
+  description: pageDescription,
   alternates: {
     canonical: "/privacy/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Pay Raise Kit",
+    url: "/privacy/",
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    card: "summary",
+    title: pageTitle,
+    description: pageDescription,
   },
 };
 

@@ -2,14 +2,29 @@ import type { Metadata } from "next";
 
 import { siteConfig } from "@/lib/site";
 
+const pageTitle = "Contact Pay Raise Kit";
+const pageDescription =
+  "Contact Pay Raise Kit to report a calculation issue, suggest an improvement, or ask about the site.";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "Contact Pay Raise Kit",
+    absolute: pageTitle,
   },
-  description:
-    "Contact Pay Raise Kit to report a calculation issue, suggest an improvement, or ask about the site.",
+  description: pageDescription,
   alternates: {
     canonical: "/contact/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Pay Raise Kit",
+    url: "/contact/",
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    card: "summary",
+    title: pageTitle,
+    description: pageDescription,
   },
 };
 

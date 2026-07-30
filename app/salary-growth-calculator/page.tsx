@@ -4,15 +4,30 @@ import { FaqList } from "@/components/FaqList";
 import { SalaryGrowthCalculator } from "@/components/calculators/SalaryGrowthCalculator";
 import { ToolLinkCard } from "@/components/ToolLinkCard";
 
+const pageTitle =
+  "Salary Growth Calculator – Project Future Earnings by Year | Pay Raise Kit";
+const pageDescription =
+  "Project salary growth over multiple years with an annual raise rate, year-by-year table, and final earnings estimate.";
+
 export const metadata: Metadata = {
   title: {
-    absolute:
-      "Salary Growth Calculator – Project Future Earnings by Year | Pay Raise Kit",
+    absolute: pageTitle,
   },
-  description:
-    "Project salary growth over multiple years with an annual raise rate, year-by-year table, and final earnings estimate.",
+  description: pageDescription,
   alternates: {
     canonical: "/salary-growth-calculator/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Pay Raise Kit",
+    url: "/salary-growth-calculator/",
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    card: "summary",
+    title: pageTitle,
+    description: pageDescription,
   },
 };
 

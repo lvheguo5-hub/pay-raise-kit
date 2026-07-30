@@ -4,15 +4,30 @@ import { FaqList } from "@/components/FaqList";
 import { RaisePercentageCalculator } from "@/components/calculators/RaisePercentageCalculator";
 import { ToolLinkCard } from "@/components/ToolLinkCard";
 
+const pageTitle =
+  "Raise Percentage Calculator – Find Your Salary Increase Rate | Pay Raise Kit";
+const pageDescription =
+  "Enter old and new pay to calculate the exact raise percentage and dollar increase across common pay periods.";
+
 export const metadata: Metadata = {
   title: {
-    absolute:
-      "Raise Percentage Calculator – Find Your Salary Increase Rate | Pay Raise Kit",
+    absolute: pageTitle,
   },
-  description:
-    "Enter old and new pay to calculate the exact raise percentage and dollar increase across common pay periods.",
+  description: pageDescription,
   alternates: {
     canonical: "/raise-percentage-calculator/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Pay Raise Kit",
+    url: "/raise-percentage-calculator/",
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    card: "summary",
+    title: pageTitle,
+    description: pageDescription,
   },
 };
 

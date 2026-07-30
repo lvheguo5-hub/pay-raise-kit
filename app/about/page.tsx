@@ -1,14 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const pageTitle = "About Pay Raise Kit";
+const pageDescription =
+  "Learn what Pay Raise Kit calculates, how the formulas work, and what the free tools intentionally leave out.";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "About Pay Raise Kit",
+    absolute: pageTitle,
   },
-  description:
-    "Learn what Pay Raise Kit calculates, how the formulas work, and what the free tools intentionally leave out.",
+  description: pageDescription,
   alternates: {
     canonical: "/about/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Pay Raise Kit",
+    url: "/about/",
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    card: "summary",
+    title: pageTitle,
+    description: pageDescription,
   },
 };
 

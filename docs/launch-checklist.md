@@ -123,8 +123,9 @@ never recorded as confirmed indexing.
   About, and Contact
 - Verdict: `CHECK -> GO`, confidence 92%
 - P0 blockers: none
-- P1 before observation: give each child page its own Open Graph and Twitter
-  title, description, and URL instead of inheriting the homepage values
+- [x] P1 before observation completed on 2026-07-30: all six child pages now
+  export their own Open Graph and Twitter title, description, and canonical
+  sharing URL instead of inheriting the homepage values
 - P1 not allowed to delay observation: add the two exact homepage synonym
   phrases naturally in the lede; consider breadcrumb structured data
 - Explicit stop line: no blog batch, no new calculator, no tax/CPI/state scope,

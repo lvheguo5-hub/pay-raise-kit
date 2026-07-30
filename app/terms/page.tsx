@@ -1,13 +1,28 @@
 import type { Metadata } from "next";
 
+const pageTitle = "Terms of Use | Pay Raise Kit";
+const pageDescription =
+  "Review the calculation assumptions, permitted use, disclaimers, and limitations for Pay Raise Kit.";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "Terms of Use | Pay Raise Kit",
+    absolute: pageTitle,
   },
-  description:
-    "Review the calculation assumptions, permitted use, disclaimers, and limitations for Pay Raise Kit.",
+  description: pageDescription,
   alternates: {
     canonical: "/terms/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Pay Raise Kit",
+    url: "/terms/",
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    card: "summary",
+    title: pageTitle,
+    description: pageDescription,
   },
 };
 

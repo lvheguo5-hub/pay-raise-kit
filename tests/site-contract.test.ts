@@ -110,6 +110,23 @@ describe("static site baseline", () => {
     expect(privacy).toContain("hosting provider");
   });
 
+  it("gives every child page its own social sharing metadata", async () => {
+    for (const route of [
+      "raise-percentage-calculator",
+      "salary-growth-calculator",
+      "about",
+      "contact",
+      "privacy",
+      "terms",
+    ]) {
+      const page = await readFile(`app/${route}/page.tsx`, "utf8");
+
+      expect(page).toContain("openGraph:");
+      expect(page).toContain("twitter:");
+      expect(page).toContain(`url: "/${route}/"`);
+    }
+  });
+
   it("ships crawl controls and Cloudflare security headers", async () => {
     const robots = await readFile("app/robots.ts", "utf8");
     const headers = await readFile("public/_headers", "utf8");
