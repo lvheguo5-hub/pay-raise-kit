@@ -10,4 +10,23 @@ describe("static site baseline", () => {
     expect(nextConfig).toContain("trailingSlash: true");
     expect(siteConfig).toContain("https://payraisekit.com");
   });
+
+  it("renders a crawlable shell without launch-excluded tracking", async () => {
+    const layout = await readFile("app/layout.tsx", "utf8");
+
+    expect(layout).toContain("metadataBase");
+    expect(layout).toContain("<SiteHeader");
+    expect(layout).toContain("<SiteFooter");
+    expect(layout).not.toContain("gtag");
+    expect(layout).not.toContain("googletagmanager");
+  });
+
+  it("links every approved calculator and trust route", async () => {
+    const header = await readFile("components/SiteHeader.tsx", "utf8");
+    const footer = await readFile("components/SiteFooter.tsx", "utf8");
+
+    expect(header).toContain("toolRoutes");
+    expect(footer).toContain("toolRoutes");
+    expect(footer).toContain("trustRoutes");
+  });
 });
