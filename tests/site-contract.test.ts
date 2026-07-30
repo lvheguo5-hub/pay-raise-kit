@@ -53,4 +53,15 @@ describe("static site baseline", () => {
     );
     expect(page).toContain("Find Your Salary Increase Rate");
   });
+
+  it("gives salary growth its own time-based intent and canonical", async () => {
+    const page = await readFile(
+      "app/salary-growth-calculator/page.tsx",
+      "utf8",
+    );
+
+    expect(page).toContain("Salary Growth Calculator");
+    expect(page).toContain('canonical: "/salary-growth-calculator/"');
+    expect(page).toContain("Project Future Earnings by Year");
+  });
 });
