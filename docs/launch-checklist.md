@@ -93,9 +93,10 @@ never recorded as confirmed indexing.
   routing service enabled.
 - The destination Gmail address is verified and the
   `hello@payraisekit.com` routing rule is active.
-- Mail delivery is not yet marked verified: at 2026-07-30 22:38 CST, public
-  `.com` delegation and direct probes of the assigned Cloudflare nameservers
-  had not converged on the new mail records.
+- Mail delivery is not yet marked verified: an external test message was sent
+  to `hello@payraisekit.com`, but it had not reached the destination inbox by
+  2026-07-30 22:42 CST. Public `.com` delegation and direct DNS probes had not
+  fully converged on the new mail records at that time.
 - Namecheap parking records replaced inside the Cloudflare zone: verified
 - Namecheap control panel shows the two Cloudflare nameservers saved
 - Public `.com` delegation still returned the former Namecheap nameservers at
