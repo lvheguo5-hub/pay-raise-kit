@@ -64,4 +64,64 @@ describe("static site baseline", () => {
     expect(page).toContain('canonical: "/salary-growth-calculator/"');
     expect(page).toContain("Project Future Earnings by Year");
   });
+
+  it("publishes exactly the approved sitemap routes", async () => {
+    const sitemap = await readFile("app/sitemap.ts", "utf8");
+
+    for (const route of [
+      "/",
+      "/raise-percentage-calculator/",
+      "/salary-growth-calculator/",
+      "/about/",
+      "/contact/",
+      "/privacy/",
+      "/terms/",
+    ]) {
+      expect(sitemap).toContain(route);
+    }
+
+    expect(sitemap).not.toContain("/tax");
+    expect(sitemap).not.toContain("/inflation");
+  });
+
+  it("keeps first-release exclusions out of the product", async () => {
+    const packageJson = await readFile("package.json", "utf8");
+
+    expect(packageJson).not.toContain("firebase");
+    expect(packageJson).not.toContain("stripe");
+    expect(packageJson).not.toContain("gtag");
+  });
+
+  it("publishes truthful trust pages with self canonicals", async () => {
+    for (const route of ["about", "contact", "privacy", "terms"]) {
+      const page = await readFile(`app/${route}/page.tsx`, "utf8");
+      expect(page).toContain(`canonical: "/${route}/"`);
+    }
+
+    const privacy = await readFile("app/privacy/page.tsx", "utf8");
+    expect(privacy).toContain("Calculations stay in your browser");
+    expect(privacy).toContain("hosting provider");
+  });
+
+  it("ships crawl controls and Cloudflare security headers", async () => {
+    const robots = await readFile("app/robots.ts", "utf8");
+    const headers = await readFile("public/_headers", "utf8");
+
+    expect(robots).toContain("sitemap.xml");
+    expect(headers).toContain("X-Content-Type-Options: nosniff");
+    expect(headers).toContain("Referrer-Policy: strict-origin-when-cross-origin");
+    expect(headers).toContain(
+      "Permissions-Policy: camera=(), microphone=(), geolocation=()",
+    );
+  });
+
+  it("verifies the exported route, SEO, domain, and secret contracts", async () => {
+    const verifier = await readFile("scripts/verify-static.mjs", "utf8");
+
+    expect(verifier).toContain("expectedPages");
+    expect(verifier).toContain("sitemap.xml");
+    expect(verifier).toContain("payraisekit.com");
+    expect(verifier).toContain("PRIVATE KEY");
+    expect(verifier).toContain("gh[pousr]_");
+  });
 });
