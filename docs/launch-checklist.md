@@ -10,7 +10,7 @@ never recorded as confirmed indexing.
 ## Release identity
 
 - [x] Deployed source commit recorded:
-      `49eaf778aed5f53cf6382eedb5e274838aab5106`
+      `250f65156c08d04477c3c4bd3255793a14454ccb`
 - [x] Product worktree clean before the launch-record update
 - [x] GitHub repository verified as `lvheguo5-hub/pay-raise-kit`
 - [x] Cloudflare Pages project verified as `pay-raise-kit`
@@ -56,11 +56,12 @@ never recorded as confirmed indexing.
 ## Deployment evidence
 
 - Pages deployment URL:
-  `https://f485d3e4.pay-raise-kit.pages.dev`
-- Pages deployment identifier: `f485d3e4-065a-4c0c-ac29-160bc791ac36`
-- Deployment commit: `49eaf778aed5f53cf6382eedb5e274838aab5106`
+  `https://de06c645.pay-raise-kit.pages.dev`
+- Pages deployment identifier: `de06c645-5c65-4794-922b-4b3f8676e3db`
+- Deployment commit: `250f65156c08d04477c3c4bd3255793a14454ccb`
 - Pages verification result: project URL and production custom domain loaded
-  successfully in Chrome; direct HTTPS checks passed
+  successfully; all six child pages returned HTTP 200 with page-specific Open
+  Graph and Twitter metadata
 
 ## DNS inventory
 
