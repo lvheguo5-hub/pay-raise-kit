@@ -87,9 +87,11 @@ never recorded as confirmed indexing.
   - `rex.ns.cloudflare.com`
 - Existing five MX records imported and retained: verified
 - Existing SPF record imported and retained: verified
-- Namecheap parking records replaced by Cloudflare Pages custom-domain records:
-  verified
-- Cloudflare zone status: active
+- Namecheap parking records replaced inside the Cloudflare zone: verified
+- Namecheap control panel shows the two Cloudflare nameservers saved
+- Public `.com` delegation still returned the former Namecheap nameservers at
+  2026-07-30 22:03 CST; global nameserver propagation remains pending
+- Cloudflare dashboard zone status: active
 - Apex custom domain: active, SSL enabled
 - `www` custom domain: active, SSL enabled
 - `www` to apex redirect: active Cloudflare Single Redirect, HTTP 301
@@ -108,9 +110,9 @@ never recorded as confirmed indexing.
 ## Operations handoff
 
 - Registry entry: written to `web-chuhai-ops/sites/registry.yaml`
-- Observation start: 2026-07-30
-- Next review: 2026-08-13
-- Current stage: two-week observation
+- Observation start: pending global DNS delegation
+- Next DNS review: 2026-08-01
+- Current stage: DNS propagation
 
 ## Rollback
 
