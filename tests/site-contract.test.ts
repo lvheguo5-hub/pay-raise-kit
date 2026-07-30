@@ -134,11 +134,13 @@ describe("static site baseline", () => {
 
   it("runs the full release verification in CI", async () => {
     const workflow = await readFile(".github/workflows/verify.yml", "utf8");
+    const vitestConfig = await readFile("vitest.config.ts", "utf8");
 
     expect(workflow).toContain("actions/checkout@v6");
     expect(workflow).toContain("npm ci");
     expect(workflow).toContain("npm run verify");
     expect(workflow).not.toContain("CLOUDFLARE_API_TOKEN");
+    expect(vitestConfig).toContain('".worktrees/**"');
   });
 
   it("keeps an auditable production handoff checklist", async () => {
