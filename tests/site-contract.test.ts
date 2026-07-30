@@ -124,4 +124,23 @@ describe("static site baseline", () => {
     expect(verifier).toContain("PRIVATE KEY");
     expect(verifier).toContain("gh[pousr]_");
   });
+
+  it("runs the full release verification in CI", async () => {
+    const workflow = await readFile(".github/workflows/verify.yml", "utf8");
+
+    expect(workflow).toContain("actions/checkout@v6");
+    expect(workflow).toContain("npm ci");
+    expect(workflow).toContain("npm run verify");
+    expect(workflow).not.toContain("CLOUDFLARE_API_TOKEN");
+  });
+
+  it("keeps an auditable production handoff checklist", async () => {
+    const checklist = await readFile("docs/launch-checklist.md", "utf8");
+
+    expect(checklist).toContain("Automated verification");
+    expect(checklist).toContain("Browser acceptance");
+    expect(checklist).toContain("DNS inventory");
+    expect(checklist).toContain("Google Search Console");
+    expect(checklist).toContain("Rollback");
+  });
 });
