@@ -30,6 +30,13 @@ describe("static site baseline", () => {
     expect(footer).toContain("trustRoutes");
   });
 
+  it("keeps every calculator link visible in the mobile header", async () => {
+    const styles = await readFile("app/globals.css", "utf8");
+
+    expect(styles).toContain("flex-wrap: wrap;");
+    expect(styles).toContain("white-space: normal;");
+  });
+
   it("keeps the homepage focused on the primary pay raise task", async () => {
     const page = await readFile("app/page.tsx", "utf8");
 

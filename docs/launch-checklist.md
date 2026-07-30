@@ -18,7 +18,7 @@ never recorded as confirmed indexing.
 
 - [x] Typecheck passed on 2026-07-30
 - [x] ESLint passed on 2026-07-30 with zero warnings
-- [x] Vitest passed on 2026-07-30: 27 tests, zero failures
+- [x] Vitest passed on 2026-07-30: 32 tests, zero failures
 - [x] Next.js production build passed on 2026-07-30
 - [x] Static-output verifier passed for seven routes, crawl files, metadata,
       security headers, and tracked-source secret signatures
@@ -28,16 +28,16 @@ never recorded as confirmed indexing.
 
 ### Local static export
 
-- [ ] Desktop homepage percentage-raise flow
-- [ ] Desktop homepage fixed-amount flow
-- [ ] Mobile homepage hourly flow
-- [ ] Reverse calculator increase flow
-- [ ] Reverse calculator pay-cut flow
-- [ ] Salary growth five-year flow
-- [ ] Invalid input or boundary state on each calculator
-- [ ] All navigation and trust links
-- [ ] No mobile horizontal overflow
-- [ ] No blocking browser console errors
+- [x] Desktop homepage percentage-raise flow
+- [x] Desktop homepage fixed-amount flow
+- [x] Mobile homepage hourly flow
+- [x] Reverse calculator increase flow
+- [x] Reverse calculator pay-cut flow
+- [x] Salary growth five-year flow
+- [x] Invalid input or boundary state on each calculator
+- [x] All navigation and trust links
+- [x] No mobile horizontal overflow
+- [x] No blocking browser console errors
 
 ### Production custom domain
 
