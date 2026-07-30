@@ -85,12 +85,21 @@ never recorded as confirmed indexing.
 - Cloudflare-assigned nameservers:
   - `becky.ns.cloudflare.com`
   - `rex.ns.cloudflare.com`
-- Existing five MX records imported and retained: verified
-- Existing SPF record imported and retained: verified
+- The five imported Namecheap forwarding MX records and the imported Namecheap
+  SPF record were removed from the Cloudflare zone after Cloudflare Email
+  Routing reported them as conflicting records.
+- Cloudflare Email Routing provisioned three managed MX records plus its SPF and
+  DKIM TXT records; the Cloudflare dashboard showed those records locked and the
+  routing service enabled.
+- The destination Gmail address is verified and the
+  `hello@payraisekit.com` routing rule is active.
+- Mail delivery is not yet marked verified: at 2026-07-30 22:38 CST, public
+  `.com` delegation and direct probes of the assigned Cloudflare nameservers
+  had not converged on the new mail records.
 - Namecheap parking records replaced inside the Cloudflare zone: verified
 - Namecheap control panel shows the two Cloudflare nameservers saved
 - Public `.com` delegation still returned the former Namecheap nameservers at
-  2026-07-30 22:03 CST; global nameserver propagation remains pending
+  2026-07-30 22:38 CST; global nameserver propagation remains pending
 - Cloudflare dashboard zone status: active
 - Apex custom domain: active, SSL enabled
 - `www` custom domain: active, SSL enabled
@@ -106,6 +115,19 @@ never recorded as confirmed indexing.
 - Raise percentage page indexing request: submitted
 - Salary growth page indexing request: submitted
 - Confirmed indexed pages: Unconfirmed
+
+## SEO Agent post-launch audit
+
+- Audit scope: the deployed homepage, both supporting calculators, crawl files,
+  About, and Contact
+- Verdict: `CHECK -> GO`, confidence 92%
+- P0 blockers: none
+- P1 before observation: give each child page its own Open Graph and Twitter
+  title, description, and URL instead of inheriting the homepage values
+- P1 not allowed to delay observation: add the two exact homepage synonym
+  phrases naturally in the lede; consider breadcrumb structured data
+- Explicit stop line: no blog batch, no new calculator, no tax/CPI/state scope,
+  and no Title churn during the initial observation window
 
 ## Operations handoff
 
