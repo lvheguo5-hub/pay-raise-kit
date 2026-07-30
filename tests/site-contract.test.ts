@@ -40,4 +40,17 @@ describe("static site baseline", () => {
     expect(page).not.toContain("<RaisePercentageCalculator");
     expect(page).not.toContain("<SalaryGrowthCalculator");
   });
+
+  it("gives the reverse calculator its own intent and canonical", async () => {
+    const page = await readFile(
+      "app/raise-percentage-calculator/page.tsx",
+      "utf8",
+    );
+
+    expect(page).toContain("Raise Percentage Calculator");
+    expect(page).toContain(
+      'canonical: "/raise-percentage-calculator/"',
+    );
+    expect(page).toContain("Find Your Salary Increase Rate");
+  });
 });
