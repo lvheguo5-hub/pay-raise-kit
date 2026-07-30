@@ -29,4 +29,15 @@ describe("static site baseline", () => {
     expect(footer).toContain("toolRoutes");
     expect(footer).toContain("trustRoutes");
   });
+
+  it("keeps the homepage focused on the primary pay raise task", async () => {
+    const page = await readFile("app/page.tsx", "utf8");
+
+    expect(page).toContain("Pay Raise Calculator");
+    expect(page).toContain("PayRaiseCalculator");
+    expect(page).toContain("/raise-percentage-calculator/");
+    expect(page).toContain("/salary-growth-calculator/");
+    expect(page).not.toContain("<RaisePercentageCalculator");
+    expect(page).not.toContain("<SalaryGrowthCalculator");
+  });
 });
