@@ -9,10 +9,11 @@ never recorded as confirmed indexing.
 
 ## Release identity
 
-- [ ] Final local commit recorded
-- [ ] Product worktree clean
-- [ ] GitHub repository verified as `lvheguo5-hub/pay-raise-kit`
-- [ ] Cloudflare Pages project verified as `pay-raise-kit`
+- [x] Deployed source commit recorded:
+      `49eaf778aed5f53cf6382eedb5e274838aab5106`
+- [x] Product worktree clean before the launch-record update
+- [x] GitHub repository verified as `lvheguo5-hub/pay-raise-kit`
+- [x] Cloudflare Pages project verified as `pay-raise-kit`
 
 ## Automated verification
 
@@ -41,21 +42,25 @@ never recorded as confirmed indexing.
 
 ### Production custom domain
 
-- [ ] Repeat all representative calculator flows on `payraisekit.com`
-- [ ] Verify every sitemap URL without login
-- [ ] Verify HTTPS
-- [ ] Verify apex is canonical
-- [ ] Verify `www` permanently redirects to the apex equivalent path
-- [ ] Verify `robots.txt`
-- [ ] Verify `sitemap.xml`
+- [x] Repeat representative flows for all three calculators on
+      `payraisekit.com`
+- [x] Verify all seven sitemap URLs return HTTP 200 without login
+- [x] Verify HTTPS
+- [x] Verify apex canonical tags on the three calculator pages
+- [x] Verify `www` returns HTTP 301 to the apex equivalent path and preserves
+      the query string
+- [x] Verify `robots.txt` returns HTTP 200 and permits search indexing
+- [x] Verify `sitemap.xml` returns HTTP 200 and lists seven canonical URLs
 - [ ] Verify `hello@payraisekit.com` delivery
 
 ## Deployment evidence
 
-- Pages deployment URL: Not created
-- Pages deployment identifier: Not created
-- Deployment commit: Not deployed
-- Pages verification result: Not run
+- Pages deployment URL:
+  `https://f485d3e4.pay-raise-kit.pages.dev`
+- Pages deployment identifier: `f485d3e4-065a-4c0c-ac29-160bc791ac36`
+- Deployment commit: `49eaf778aed5f53cf6382eedb5e274838aab5106`
+- Pages verification result: project URL and production custom domain loaded
+  successfully in Chrome; direct HTTPS checks passed
 
 ## DNS inventory
 
@@ -69,34 +74,43 @@ never recorded as confirmed indexing.
   - apex currently resolves to the Namecheap parking service
   - `www` CNAME currently points to `parkingpage.namecheap.com`
 - Mail records:
-  - Namecheap email-forwarding MX records observed
+  - Namecheap email-forwarding MX records observed at priorities
+    `10, 10, 10, 15, 20`
   - SPF observed: `v=spf1 include:spf.efwd.registrar-servers.com ~all`
-- Complete record screenshot or export: Not captured
+- Exact record inventory captured in the launch session before nameserver
+  delegation
 
 ### After change
 
-- Cloudflare-assigned nameservers: Not assigned
-- Existing MX records recreated before activation: Not verified
-- Existing SPF recreated before activation: Not verified
-- Parking records removed: Not verified
-- Cloudflare zone status: Not created
+- Cloudflare-assigned nameservers:
+  - `becky.ns.cloudflare.com`
+  - `rex.ns.cloudflare.com`
+- Existing five MX records imported and retained: verified
+- Existing SPF record imported and retained: verified
+- Namecheap parking records replaced by Cloudflare Pages custom-domain records:
+  verified
+- Cloudflare zone status: active
+- Apex custom domain: active, SSL enabled
+- `www` custom domain: active, SSL enabled
+- `www` to apex redirect: active Cloudflare Single Redirect, HTTP 301
+- Google ownership TXT record: added through Cloudflare authorization
 
 ## Google Search Console
 
-- Property: Not created or verified
-- Sitemap submission: Not submitted
-- GSC discovered-page count: Unconfirmed
-- Homepage indexing request: Not requested
-- Raise percentage page indexing request: Not requested
-- Salary growth page indexing request: Not requested
+- Property: `sc-domain:payraisekit.com`, ownership verified
+- Sitemap submission: `https://payraisekit.com/sitemap.xml`, successful
+- GSC discovered-page count: 7
+- Homepage indexing request: submitted
+- Raise percentage page indexing request: submitted
+- Salary growth page indexing request: submitted
 - Confirmed indexed pages: Unconfirmed
 
 ## Operations handoff
 
-- Registry entry: Not written
-- Observation start: Not started
-- Next review: Not scheduled
-- Current stage: pre-launch
+- Registry entry: written to `web-chuhai-ops/sites/registry.yaml`
+- Observation start: 2026-07-30
+- Next review: 2026-08-13
+- Current stage: two-week observation
 
 ## Rollback
 
