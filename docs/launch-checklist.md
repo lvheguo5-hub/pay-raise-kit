@@ -1,6 +1,6 @@
 # Pay Raise Kit Launch Checklist
 
-Last updated: 2026-07-30  
+Last updated: 2026-07-31
 Canonical production URL: `https://payraisekit.com`
 
 This file records observed launch evidence. A checked box means the named
@@ -10,19 +10,19 @@ never recorded as confirmed indexing.
 ## Release identity
 
 - [x] Deployed source commit recorded:
-      `250f65156c08d04477c3c4bd3255793a14454ccb`
+      `1ecd928cc12e9d88a13899c60cf31bc2de2f4c69`
 - [x] Product worktree clean before the launch-record update
 - [x] GitHub repository verified as `lvheguo5-hub/pay-raise-kit`
 - [x] Cloudflare Pages project verified as `pay-raise-kit`
 
 ## Automated verification
 
-- [x] Typecheck passed on 2026-07-30
-- [x] ESLint passed on 2026-07-30 with zero warnings
-- [x] Vitest passed on 2026-07-30: 32 tests, zero failures
-- [x] Next.js production build passed on 2026-07-30
+- [x] Typecheck passed on 2026-07-31
+- [x] ESLint passed on 2026-07-31 with zero warnings
+- [x] Vitest passed on 2026-07-31: 34 tests, zero failures
+- [x] Next.js production build passed on 2026-07-31
 - [x] Static-output verifier passed for seven routes, crawl files, metadata,
-      security headers, and tracked-source secret signatures
+      favicon assets, security headers, and tracked-source secret signatures
 - [x] `git diff --check` passed
 
 ## Browser acceptance
@@ -51,17 +51,21 @@ never recorded as confirmed indexing.
       the query string
 - [x] Verify `robots.txt` returns HTTP 200 and permits search indexing
 - [x] Verify `sitemap.xml` returns HTTP 200 and lists seven canonical URLs
+- [x] Verify all eight favicon and manifest assets return HTTP 200 and exactly
+      match the deployed source; verify homepage icon links are present
 - [ ] Verify `hello@payraisekit.com` delivery
 
 ## Deployment evidence
 
 - Pages deployment URL:
-  `https://de06c645.pay-raise-kit.pages.dev`
-- Pages deployment identifier: `de06c645-5c65-4794-922b-4b3f8676e3db`
-- Deployment commit: `250f65156c08d04477c3c4bd3255793a14454ccb`
+  `https://cc6cdef7.pay-raise-kit.pages.dev`
+- Pages deployment identifier: `cc6cdef7-b47f-4a61-827d-ed772dc597a7`
+- Deployment commit: `1ecd928cc12e9d88a13899c60cf31bc2de2f4c69`
 - Pages verification result: project URL and production custom domain loaded
-  successfully; all six child pages returned HTTP 200 with page-specific Open
-  Graph and Twitter metadata
+  successfully; all favicon PNG, ICO, SVG, Apple touch icon, Android manifest
+  icons, and the web manifest returned HTTP 200 and matched the deployed files.
+  The production homepage referenced the ICO, 16px, 32px, Apple touch icon, and
+  manifest paths.
 
 ## DNS inventory
 
