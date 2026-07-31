@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 
 describe("static site baseline", () => {
@@ -125,6 +125,59 @@ describe("static site baseline", () => {
       expect(page).toContain("twitter:");
       expect(page).toContain(`url: "/${route}/"`);
     }
+  });
+
+  it("ships a complete Pay Raise Kit favicon contract", async () => {
+    const requiredAssets = [
+      "public/favicon-source.svg",
+      "public/favicon.ico",
+      "public/favicon-16x16.png",
+      "public/favicon-32x32.png",
+      "public/apple-touch-icon.png",
+      "public/android-chrome-192x192.png",
+      "public/android-chrome-512x512.png",
+      "public/site.webmanifest",
+    ];
+
+    for (const asset of requiredAssets) {
+      await expect(access(asset)).resolves.toBeUndefined();
+    }
+
+    const layout = await readFile("app/layout.tsx", "utf8");
+    expect(layout).toContain('manifest: "/site.webmanifest"');
+    expect(layout).toContain('url: "/favicon.ico"');
+    expect(layout).toContain('url: "/apple-touch-icon.png"');
+
+    const manifest = JSON.parse(
+      await readFile("public/site.webmanifest", "utf8"),
+    ) as {
+      name: string;
+      short_name: string;
+      icons: Array<{ src: string; sizes: string; type: string }>;
+      theme_color: string;
+      background_color: string;
+      display: string;
+    };
+
+    expect(manifest).toMatchObject({
+      name: "Pay Raise Kit",
+      short_name: "Pay Raise Kit",
+      theme_color: "#0d766e",
+      background_color: "#f5f7f2",
+      display: "standalone",
+    });
+    expect(manifest.icons).toEqual([
+      {
+        src: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        src: "/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ]);
   });
 
   it("ships crawl controls and Cloudflare security headers", async () => {

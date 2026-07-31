@@ -7,6 +7,7 @@
     "node": "^22.13.0 || >=24.0.0"
   },
   "scripts": {
+    "generate:favicons": "node scripts/generate-favicons.mjs",
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
@@ -29,6 +30,7 @@
     "eslint": "8.57.1",
     "eslint-config-next": "14.2.35",
     "jsdom": "^30.0.1",
+    "sharp": "^0.35.3",
     "typescript": "5.9.3",
     "vitest": "3.2.4"
   }

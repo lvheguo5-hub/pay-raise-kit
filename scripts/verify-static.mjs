@@ -49,6 +49,14 @@ for (const requiredFile of [
   "out/robots.txt",
   "out/sitemap.xml",
   "out/_headers",
+  "out/favicon-source.svg",
+  "out/favicon.ico",
+  "out/favicon-16x16.png",
+  "out/favicon-32x32.png",
+  "out/apple-touch-icon.png",
+  "out/android-chrome-192x192.png",
+  "out/android-chrome-512x512.png",
+  "out/site.webmanifest",
 ]) {
   if (!(await exists(requiredFile))) {
     failures.push(`Missing static output: ${requiredFile}`);
@@ -94,6 +102,72 @@ if (await exists("out/_headers")) {
   ]) {
     if (!headers.includes(header)) {
       failures.push(`Missing Cloudflare header: ${header}`);
+    }
+  }
+}
+
+for (const [file, expectedSize] of [
+  ["out/favicon-16x16.png", 16],
+  ["out/favicon-32x32.png", 32],
+  ["out/apple-touch-icon.png", 180],
+  ["out/android-chrome-192x192.png", 192],
+  ["out/android-chrome-512x512.png", 512],
+]) {
+  if (!(await exists(file))) {
+    continue;
+  }
+
+  const png = await readFile(file);
+  if (
+    png.toString("hex", 0, 8) !== "89504e470d0a1a0a" ||
+    png.readUInt32BE(16) !== expectedSize ||
+    png.readUInt32BE(20) !== expectedSize
+  ) {
+    failures.push(
+      `Invalid PNG dimensions in ${file}: expected ${expectedSize}x${expectedSize}`,
+    );
+  }
+}
+
+if (await exists("out/favicon.ico")) {
+  const ico = await readFile("out/favicon.ico");
+  const iconType = ico.readUInt16LE(2);
+  const iconCount = ico.readUInt16LE(4);
+  const sizes = Array.from({ length: iconCount }, (_, index) =>
+    ico.readUInt8(6 + index * 16),
+  );
+
+  if (iconType !== 1 || iconCount !== 2 || sizes.join(",") !== "16,32") {
+    failures.push("favicon.ico must contain 16x16 and 32x32 icon entries");
+  }
+}
+
+if (await exists("out/site.webmanifest")) {
+  const manifest = JSON.parse(
+    await readFile("out/site.webmanifest", "utf8"),
+  );
+  if (
+    manifest.name !== "Pay Raise Kit" ||
+    manifest.theme_color !== "#0d766e" ||
+    manifest.icons?.length !== 2
+  ) {
+    failures.push(
+      "site.webmanifest does not match the Pay Raise Kit icon contract",
+    );
+  }
+}
+
+if (await exists("out/index.html")) {
+  const homepage = await readFile("out/index.html", "utf8");
+  for (const asset of [
+    "/favicon.ico",
+    "/favicon-16x16.png",
+    "/favicon-32x32.png",
+    "/apple-touch-icon.png",
+    "/site.webmanifest",
+  ]) {
+    if (!homepage.includes(asset)) {
+      failures.push(`Homepage metadata does not reference ${asset}`);
     }
   }
 }
