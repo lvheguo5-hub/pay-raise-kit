@@ -20,6 +20,17 @@ const expectedPages = [
 ];
 
 const failures = [];
+const analyticsConfig = await readFile("lib/analytics.ts", "utf8");
+const measurementId = analyticsConfig.match(
+  /PAY_RAISE_KIT_GA_MEASUREMENT_ID = "(G-[A-Z0-9]+)"/,
+)?.[1];
+
+if (!measurementId) {
+  failures.push("Missing valid PAY_RAISE_KIT_GA_MEASUREMENT_ID");
+}
+if (["G-DZ2P1TDW9S", "G-18QX9022FY"].includes(measurementId)) {
+  failures.push("Production uses another product's GA4 Measurement ID");
+}
 
 for (const page of expectedPages) {
   if (!(await exists(page.file))) {
@@ -41,6 +52,17 @@ for (const page of expectedPages) {
   }
   if (/example\.com|freecouplegames|randompokemonteamgenerator/i.test(html)) {
     failures.push(`Wrong domain or brand in ${page.file}`);
+  }
+  if (
+    measurementId &&
+    !html.includes(
+      `https://www.googletagmanager.com/gtag/js?id=${measurementId}`,
+    )
+  ) {
+    failures.push(`Missing Pay Raise Kit GA4 tag in ${page.file}`);
+  }
+  if (!html.includes("allow_google_signals")) {
+    failures.push(`Missing GA4 privacy configuration in ${page.file}`);
   }
 }
 

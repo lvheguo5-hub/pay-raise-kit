@@ -4,6 +4,12 @@ node_modules/
 out/
 .env
 .env.local
+.env.*
+credentials.py
+totp_codes.py
+*.pem
+*.key
+api_keys*.json
 .DS_Store
 *.log
 *.tsbuildinfo

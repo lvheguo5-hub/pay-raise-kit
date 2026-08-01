@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { PAY_RAISE_KIT_GA_MEASUREMENT_ID } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site";
 
 import "./globals.css";
@@ -64,6 +66,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
+        <GoogleAnalytics measurementId={PAY_RAISE_KIT_GA_MEASUREMENT_ID} />
       </body>
     </html>
   );

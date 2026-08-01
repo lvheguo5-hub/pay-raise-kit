@@ -1,4 +1,4 @@
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, stat } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 
 describe("static site baseline", () => {
@@ -11,14 +11,58 @@ describe("static site baseline", () => {
     expect(siteConfig).toContain("https://payraisekit.com");
   });
 
-  it("renders a crawlable shell without launch-excluded tracking", async () => {
+  it("renders a crawlable shell", async () => {
     const layout = await readFile("app/layout.tsx", "utf8");
 
     expect(layout).toContain("metadataBase");
     expect(layout).toContain("<SiteHeader");
     expect(layout).toContain("<SiteFooter");
-    expect(layout).not.toContain("gtag");
-    expect(layout).not.toContain("googletagmanager");
+  });
+
+  it("loads the Pay Raise Kit GA4 tag with privacy-safe defaults", async () => {
+    const componentPath = "components/GoogleAnalytics.tsx";
+    const analyticsConfigPath = "lib/analytics.ts";
+
+    await expect(stat(componentPath)).resolves.toBeDefined();
+    await expect(stat(analyticsConfigPath)).resolves.toBeDefined();
+
+    const [layout, analytics, analyticsConfig] = await Promise.all([
+      readFile("app/layout.tsx", "utf8"),
+      readFile(componentPath, "utf8"),
+      readFile(analyticsConfigPath, "utf8"),
+    ]);
+
+    const id = analyticsConfig.match(
+      /PAY_RAISE_KIT_GA_MEASUREMENT_ID = "(G-[A-Z0-9]+)"/,
+    )?.[1];
+
+    expect(id).toBeTruthy();
+    expect(id).not.toBe("G-DZ2P1TDW9S");
+    expect(id).not.toBe("G-18QX9022FY");
+    expect(layout).toContain('import { GoogleAnalytics }');
+    expect(layout).toContain("PAY_RAISE_KIT_GA_MEASUREMENT_ID");
+    expect(analytics).toContain(
+      "const measurementIdPattern = /^G-[A-Z0-9]+$/;",
+    );
+    expect(analytics).toContain("allow_google_signals: false");
+    expect(analytics).toContain(
+      "allow_ad_personalization_signals: false",
+    );
+
+    const calculatorSource = (
+      await Promise.all(
+        [
+          "PayRaiseCalculator.tsx",
+          "RaisePercentageCalculator.tsx",
+          "SalaryGrowthCalculator.tsx",
+        ].map((file) =>
+          readFile(`components/calculators/${file}`, "utf8"),
+        ),
+      )
+    ).join("\n");
+
+    expect(calculatorSource).not.toContain("gtag");
+    expect(calculatorSource).not.toContain("GoogleAnalytics");
   });
 
   it("links every approved calculator and trust route", async () => {
@@ -108,6 +152,15 @@ describe("static site baseline", () => {
     const privacy = await readFile("app/privacy/page.tsx", "utf8");
     expect(privacy).toContain("Calculations stay in your browser");
     expect(privacy).toContain("hosting provider");
+    expect(privacy).toContain("Google Analytics 4");
+    expect(privacy).toContain("Google Signals");
+    expect(privacy).toContain("calculator inputs");
+    expect(privacy).toContain(
+      "https://policies.google.com/technologies/partner-sites",
+    );
+    expect(privacy).toContain(
+      "https://tools.google.com/dlpage/gaoptout",
+    );
   });
 
   it("gives every child page its own social sharing metadata", async () => {
@@ -200,6 +253,9 @@ describe("static site baseline", () => {
     expect(verifier).toContain("payraisekit.com");
     expect(verifier).toContain("PRIVATE KEY");
     expect(verifier).toContain("gh[pousr]_");
+    expect(verifier).toContain("PAY_RAISE_KIT_GA_MEASUREMENT_ID");
+    expect(verifier).toContain("googletagmanager.com/gtag/js?id=");
+    expect(verifier).toContain("allow_google_signals");
   });
 
   it("runs the full release verification in CI", async () => {

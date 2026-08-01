@@ -30,7 +30,7 @@ export default function PrivacyPage() {
   return (
     <>
       <section className="hero compact shell">
-        <p className="eyebrow">Effective July 30, 2026</p>
+        <p className="eyebrow">Effective August 1, 2026</p>
         <h1>Privacy Policy</h1>
         <p className="lede">
           The first release is designed to answer salary questions without
@@ -48,8 +48,25 @@ export default function PrivacyPage() {
 
           <h2>Accounts, advertising, and analytics</h2>
           <p>
-            The first release has no user accounts, saved calculation
-            history, advertising network, or behavioral analytics script.
+            The site has no user accounts, saved calculation history, or
+            advertising network. We use Google Analytics 4 to understand page
+            visits, referring pages, approximate region, and general browser
+            and device information. Google Analytics may use analytics cookies
+            or similar technologies for this measurement.
+          </p>
+          <p>
+            Google Signals and advertising-personalization signals are disabled
+            in our site configuration. We do not send calculator inputs, salary
+            or wage amounts, raise percentages, hours, years, or email content
+            to Google Analytics. Google explains{" "}
+            <a href="https://policies.google.com/technologies/partner-sites">
+              how it uses information from sites that use its services
+            </a>
+            . You can also use the{" "}
+            <a href="https://tools.google.com/dlpage/gaoptout">
+              Google Analytics opt-out browser add-on
+            </a>
+            .
           </p>
 
           <h2>Hosting information</h2>
@@ -70,9 +87,9 @@ export default function PrivacyPage() {
 
           <h2>Policy changes</h2>
           <p>
-            If the site later adds analytics, advertising, accounts, or other
-            data processing, this policy will be updated before those
-            features are described as active.
+            If the site later adds advertising, accounts, saved data,
+            personalized analytics, or other data processing, this policy will
+            be updated before those features are described as active.
           </p>
         </div>
       </section>
