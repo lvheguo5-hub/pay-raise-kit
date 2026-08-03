@@ -31,6 +31,15 @@ describe("static site baseline", () => {
       readFile(componentPath, "utf8"),
       readFile(analyticsConfigPath, "utf8"),
     ]);
+    const internalAnalytics = await readFile(
+      "lib/internal-analytics.ts",
+      "utf8",
+    );
+    const launchChecklist = await readFile(
+      "docs/launch-checklist.md",
+      "utf8",
+    );
+    const verifier = await readFile("scripts/verify-static.mjs", "utf8");
 
     const id = analyticsConfig.match(
       /PAY_RAISE_KIT_GA_MEASUREMENT_ID = "(G-[A-Z0-9]+)"/,
@@ -47,6 +56,20 @@ describe("static site baseline", () => {
     expect(analytics).toContain("allow_google_signals: false");
     expect(analytics).toContain(
       "allow_ad_personalization_signals: false",
+    );
+    expect(analytics).toContain('"use client"');
+    expect(analytics).toContain("getInternalAnalyticsAction");
+    expect(analytics).toContain("hasInternalAnalyticsCookie");
+    expect(internalAnalytics).toContain(
+      'const cookieName = "prk_internal"',
+    );
+    expect(internalAnalytics).toContain("Max-Age=${maxAge}");
+    expect(verifier).toContain(
+      "GA4 tag loads before the internal browser decision",
+    );
+    expect(launchChecklist).toContain("## Internal analytics exclusion");
+    expect(launchChecklist).toContain(
+      "https://payraisekit.com/?internal=1",
     );
 
     const calculatorSource = (

@@ -181,3 +181,14 @@ never recorded as confirmed indexing.
 - Source rollback: revert the smallest production commit and redeploy the
   resulting verified static export.
 - Do not delete the pre-change DNS inventory after launch.
+
+## Internal analytics exclusion
+
+- Enable on every internal browser: `https://payraisekit.com/?internal=1`
+- Disable only for a controlled analytics test: `https://payraisekit.com/?internal=0`
+- Internal mode is valid only after the address bar no longer contains
+  `internal=1` and the browser stores `prk_internal=1`.
+- With internal mode enabled, verify that neither `googletagmanager.com` nor
+  GA4 `g/collect` is requested.
+- After any controlled GA4 test, re-enable internal mode before normal browsing
+  or development continues.
