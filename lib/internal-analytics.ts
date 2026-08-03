@@ -30,6 +30,22 @@ export function getInternalAnalyticsCookie(
 
 export function removeInternalAnalyticsQuery(href: string): string {
   const url = new URL(href);
-  url.searchParams.delete("internal");
-  return `${url.pathname}${url.search}${url.hash}`;
+  const rawSearch = url.search.startsWith("?") ? url.search.slice(1) : "";
+  const remainingSearch = rawSearch
+    .split("&")
+    .filter((pair) => !isInternalQueryPair(pair))
+    .join("&");
+  const search = remainingSearch ? `?${remainingSearch}` : "";
+
+  return `${url.pathname}${search}${url.hash}`;
+}
+
+function isInternalQueryPair(pair: string): boolean {
+  const rawKey = pair.split("=", 1)[0];
+
+  try {
+    return decodeURIComponent(rawKey.replaceAll("+", " ")) === "internal";
+  } catch {
+    return rawKey === "internal";
+  }
 }

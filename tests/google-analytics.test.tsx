@@ -66,6 +66,17 @@ describe("GoogleAnalytics", () => {
     expect(container.querySelector("script")).toBeNull();
   });
 
+  it("keeps a previously marked internal browser out of GA4", () => {
+    document.cookie =
+      "prk_internal=1; Path=/; Max-Age=31536000; SameSite=Lax; Secure";
+
+    const { container } = render(
+      <GoogleAnalytics measurementId="G-BNKWB2NT8J" />,
+    );
+
+    expect(container.querySelectorAll("script")).toHaveLength(0);
+  });
+
   it("clears internal mode and restores GA4", async () => {
     document.cookie =
       "prk_internal=1; Path=/; Max-Age=31536000; SameSite=Lax; Secure";
@@ -76,7 +87,7 @@ describe("GoogleAnalytics", () => {
 
     await waitFor(() => {
       expect(document.cookie).not.toContain("prk_internal=1");
-      expect(container.querySelector("script")).not.toBeNull();
+      expect(container.querySelectorAll("script")).toHaveLength(2);
     });
     expect(window.location.pathname + window.location.search).toBe("/");
   });

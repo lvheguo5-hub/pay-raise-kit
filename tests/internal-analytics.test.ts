@@ -36,8 +36,10 @@ describe("internal analytics policy", () => {
   it("removes only the internal parameter and preserves the rest of the URL", () => {
     expect(
       removeInternalAnalyticsQuery(
-        "https://payraisekit.com/raise-percentage-calculator/?internal=1&utm_source=codex#result",
+        "https://payraisekit.com/raise-percentage-calculator/?query=pay%20raise&internal=1&utm_source=codex#result",
       ),
-    ).toBe("/raise-percentage-calculator/?utm_source=codex#result");
+    ).toBe(
+      "/raise-percentage-calculator/?query=pay%20raise&utm_source=codex#result",
+    );
   });
 });
