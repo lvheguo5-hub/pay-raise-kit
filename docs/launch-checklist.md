@@ -192,3 +192,29 @@ never recorded as confirmed indexing.
   GA4 `g/collect` is requested.
 - After any controlled GA4 test, re-enable internal mode before normal browsing
   or development continues.
+
+### Release evidence — 2026-08-03
+
+- Deployed source commit: `463292f6378dbf4ca05496e36086f5e0ffbbaca2`
+- Cloudflare Pages deployment:
+  `c5fdce68-d0cd-48b4-b301-11a7673857c3`
+- Deployment URL: `https://c5fdce68.pay-raise-kit.pages.dev`
+- Rollback deployment retained:
+  `b4c9b53c-d1bc-4e5f-9ab2-e4efd5de1eda`
+- Production HTTP: all seven sitemap routes, `robots.txt`, and `sitemap.xml`
+  returned HTTP 200.
+- Closed-by-default proof: production homepage HTML contained zero eager
+  `googletagmanager.com/gtag/js` references.
+- Controlled ordinary-mode proof: the Google tag for `G-BNKWB2NT8J` returned
+  HTTP 200 and its GA4 `page_view` request returned HTTP 204.
+- Enabling-visit proof: `?internal=1` was removed from the visible URL and no
+  Google tag or GA4 collection request was made on that visit.
+- Persistence proof: reloading after internal mode was enabled made no Google
+  tag or GA4 collection request.
+- Cleanup: internal mode was re-enabled on both browsers used for production
+  verification after the single controlled ordinary-mode test.
+- Browser note: the user's Chrome content blocker still returns
+  `ERR_BLOCKED_BY_CONTENT_BLOCKER`; the unblocked Codex browser supplied the
+  successful GA4 request/response proof.
+- Google association: GA4 property `Pay Raise Kit` is linked to Search Console
+  domain resource `payraisekit.com` through web stream `Pay Raise Kit Web`.
