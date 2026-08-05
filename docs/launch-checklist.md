@@ -218,3 +218,32 @@ never recorded as confirmed indexing.
   successful GA4 request/response proof.
 - Google association: GA4 property `Pay Raise Kit` is linked to Search Console
   domain resource `payraisekit.com` through web stream `Pay Raise Kit Web`.
+
+## Raise percentage product experiment — 2026-08-05
+
+- GoFei-confirmed scope: keep `/raise-percentage-calculator/` focused on the
+  existing reverse calculation while adding one lightweight `Check New Salary`
+  percentage mode; do not change the homepage, Title, H1, URL, Schema, body
+  content, fixed-amount scope, tax logic, or CPI logic.
+- Deployed source commit: `131b2708f7a92002e256dbfd429d431ab39a50f2`
+- Cloudflare Pages deployment:
+  `0f26b34c-50ee-4681-b529-250aa7db5d27`
+- Deployment URL: `https://0f26b34c.pay-raise-kit.pages.dev`
+- Rollback deployment retained:
+  `c5fdce68-d0cd-48b4-b301-11a7673857c3`
+- Automated verification: typecheck and lint passed; all 46 tests passed;
+  production build and seven-page static verification passed.
+- Production HTTP: all seven sitemap routes, `robots.txt`, and `sitemap.xml`
+  returned HTTP 200; security headers remained present.
+- Desktop production interaction: the default reverse mode returned `5%` for
+  `$60,000` to `$63,000`; `Check New Salary` returned `$63,000` annual and
+  `$5,250` monthly for `$60,000` plus `5%`.
+- Mobile production interaction: at 390 px, the forward mode returned
+  `$63,000`, document width matched viewport width, and no console errors were
+  observed.
+- H1 verified in production: `Raise Percentage Calculator`.
+- Experiment observation start: 2026-08-05.
+- Primary four-week review date: 2026-09-02.
+- Primary success signal: the page's average GSC position for
+  `raise percentage calculator` reaches 30 or better; total page impressions
+  reaching 500 and a first click are supporting signals, not guarantees.
