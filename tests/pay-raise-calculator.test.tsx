@@ -60,6 +60,47 @@ describe("RaisePercentageCalculator", () => {
 
     expect(screen.queryByText("5%")).toBeNull();
   });
+
+  it("checks a new salary from current pay and a raise percentage", async () => {
+    const user = userEvent.setup();
+    render(<RaisePercentageCalculator />);
+
+    await user.click(
+      screen.getByRole("button", { name: "Check New Salary" }),
+    );
+
+    expect(
+      (screen.getByRole("spinbutton", {
+        name: "Current pay",
+      }) as HTMLInputElement).value,
+    ).toBe("60000");
+    expect(
+      (screen.getByRole("spinbutton", {
+        name: "Raise percentage",
+      }) as HTMLInputElement).value,
+    ).toBe("5");
+
+    await user.click(
+      screen.getByRole("button", { name: "Calculate new salary" }),
+    );
+
+    expect(screen.getAllByText("$63,000").length).toBeGreaterThan(0);
+    expect(
+      screen.getByRole("row", { name: /Monthly/ }).textContent,
+    ).toContain("$5,250");
+  });
+
+  it("keeps the reverse calculation as the default mode", () => {
+    render(<RaisePercentageCalculator />);
+
+    expect(
+      screen
+        .getByRole("button", { name: "Calculate Raise %" })
+        .getAttribute("aria-pressed"),
+    ).toBe("true");
+    expect(screen.getByRole("spinbutton", { name: "Old pay" })).toBeTruthy();
+    expect(screen.getByRole("spinbutton", { name: "New pay" })).toBeTruthy();
+  });
 });
 
 describe("SalaryGrowthCalculator", () => {
