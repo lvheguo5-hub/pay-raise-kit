@@ -665,3 +665,16 @@ h3 {
     transition-duration: 0.01ms !important;
   }
 }
+
+.raise-tables {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.result-table caption {
+  color: var(--muted);
+  font-size: 0.86rem;
+  padding-bottom: 0.5rem;
+  text-align: left;
+}

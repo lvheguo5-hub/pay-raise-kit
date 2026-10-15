@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { RaisePercentageExamples } from "@/components/RaiseTables";
 import { FaqList } from "@/components/FaqList";
 import { RaisePercentageCalculator } from "@/components/calculators/RaisePercentageCalculator";
 import { ToolLinkCard } from "@/components/ToolLinkCard";
@@ -85,6 +86,23 @@ export default function RaisePercentagePage() {
             Example: pay moves from $60,000 to $63,000. The difference is
             $3,000. Divide $3,000 by $60,000 and multiply by 100 to get a 5%
             raise.
+          </p>
+          <h2>Raise percentage examples</h2>
+          <p>
+            The same method works for hourly wages and annual salaries. A
+            $1 raise matters more on a lower wage: going from $15 to $16 an
+            hour is a 6.67% raise, while the same $1 on $22.50 is 4.44%.
+          </p>
+          <RaisePercentageExamples />
+          <h2>Common mistakes</h2>
+          <p>
+            Divide by the old pay, not the new pay. Dividing $3,000 by $63,000
+            gives 4.76%, which understates a raise that is really 5%.
+          </p>
+          <p>
+            Compare the same pay period. If your old pay is monthly and your
+            new offer is annual, convert one of them first, or the percentage
+            will be wildly wrong.
           </p>
           <p className="disclaimer">
             Results compare gross pay before taxes and deductions and are not

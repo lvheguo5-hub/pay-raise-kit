@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { RaiseLookupTables } from "@/components/RaiseTables";
 import { FaqList } from "@/components/FaqList";
 import { PayRaiseCalculator } from "@/components/calculators/PayRaiseCalculator";
 import { ToolLinkCard } from "@/components/ToolLinkCard";
@@ -158,6 +159,46 @@ export default function HomePage() {
             Pay Raise Kit provides mathematical estimates for general
             information. Results are gross pay before taxes and deductions
             and are not tax, legal, financial, or employment advice.
+          </p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="shell">
+          <div className="section-heading">
+            <p className="eyebrow">Quick lookup</p>
+            <h2>Pay raise tables</h2>
+            <p>
+              Find your current pay in the left column to see your new gross
+              pay after a 3%, 4%, 5%, or 10% raise. Use the calculator above for
+              any other amount or pay period.
+            </p>
+          </div>
+          <RaiseLookupTables />
+        </div>
+      </section>
+
+      <section className="section soft">
+        <div className="shell prose">
+          <p className="eyebrow">Context</p>
+          <h2>Is my raise keeping up with prices?</h2>
+          <p>
+            A raise only increases what you can buy if it is larger than the
+            rise in prices over the same period. If your pay goes up 3% while
+            prices also rise 3%, your purchasing power stays about the same.
+          </p>
+          <p>
+            To estimate your real raise, divide (1 + raise ÷ 100) by (1 +
+            inflation ÷ 100), subtract 1, and multiply by 100. A 5% raise
+            during 3% inflation works out to a real raise of about 1.9%.
+          </p>
+          <h2>Raise, promotion, or cost-of-living adjustment?</h2>
+          <p>
+            A cost-of-living adjustment (COLA) is meant to offset price
+            increases. A merit raise rewards performance in the same role.
+            A promotion usually comes with a new title and a larger increase.
+            All three use the same arithmetic, so you can enter any of them as
+            a percentage or a fixed amount.
           </p>
         </div>
       </section>
